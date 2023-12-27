@@ -1,4 +1,3 @@
-
 from sklearn import preprocessing 
 import streamlit as st
 import pandas as pd
@@ -39,16 +38,17 @@ with st.form("my_form"):
     submitted = st.form_submit_button("Submit")
 
 if submitted:
-    clust=loaded_model.predict(data)[0]
-    print('Data Belongs to Cluster',clust)
+    clust = loaded_model.predict(data)[0]
+    print('Data Belongs to Cluster', clust)
 
-    cluster_df1=df[df['Cluster']==clust]
-    plt.rcParams["figure.figsize"] = (20,3)
-    for c in cluster_df1.drop(['Cluster'],axis=1):
+    cluster_df1 = df[df['Cluster'] == clust]
+    plt.rcParams["figure.figsize"] = (20, 3)
+    for c in cluster_df1.drop(['Cluster'], axis=1):
         fig, ax = plt.subplots()
-        grid= sns.FacetGrid(cluster_df1, col='Cluster')
-        grid= grid.map(plt.hist, c)
+        grid = sns.FacetGrid(cluster_df1, col='Cluster')
+        grid = grid.map(plt.hist, c)
         plt.show()
-        st.pyplot(figsize=(5, 5))
+        st.pyplot()  # Removed figsize argument
+
 
 
